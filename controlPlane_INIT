@@ -1,0 +1,19 @@
+--->After intsalling all the things on both master and worker machine/node. Do this with master node only
+to initialize as a master plane
+$ sudo kubeadm init
+
+
+# Set kubectl access:
+
+$ mkdir -p $HOME/.kube
+
+$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+
+# Test access to cluster:
+
+$ kubectl get nodes
+  
