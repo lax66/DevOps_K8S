@@ -1,0 +1,47 @@
+after setting up the master/control plane we have to set one instance to control the K8S cluster.
+here we are setting up the kubectl.
+
+we can follow the official docs as well.
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+
+here are the commands we need to execute in control node
+
+$ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+
+Validate the binary (optional)
+
+Download the kubectl checksum file:
+
+$ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+   
+Validate the kubectl binary against the checksum file:
+
+$ echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+$ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+$ chmod +x kubectl
+$ mkdir -p ~/.local/bin
+$ mv ./kubectl ~/.local/bin/kubectl
+$ kubectl version --client
+
+
+
+
+after installation need to copy the .kube file from masterplane to here
+=======================================================================
+mkdir ~/.kube
+
+
+NOTE: Take kube config file from master and keep it in this machine here
+-----------------------------------------------------------------
+cat ~/.kube/config (in master plane)
+
+vi ~/.kube/config (in control node/machine)
+
+--> Now check the cluster is working or not
+$ kubectl cluster-info
+$ kubectl get nodes
+
